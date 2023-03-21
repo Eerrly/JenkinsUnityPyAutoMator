@@ -8,7 +8,7 @@
 + Python 3.7+ [Python官网地址](https://www.python.org/)
 + Jenkins [Jenkins官网地址](https://www.jenkins.io/)下载Generic Java package (.war) 轻量包
 + Java [java官网下载地址](https://www.oracle.com/java/technologies/downloads/) 下载java并且配置环境变量
-+ BundleTool [bundletool Github下载地址](https://github.com/google/bundletool/releases) 下载bundletool-all-x.x.jar 用于安装 [Google App Bundle](https://developer.android.com/guide/app-bundle) 到手机测试
++ BundleTool [bundletool Github下载地址](https://github.com/google/bundletool/releases) 下载bundletool-all-x.x.jar 用于安装 [Google Android App Bundle](https://developer.android.com/guide/app-bundle) 到手机测试
 ## Jenkins使用
 + 如果是windows系统，使用`jenkins_win/jenkins.bat`运行jenkins主服务。如果是linux系统，使用`jenkins_mac/jenkins.sh`运行jenkins主服务。
 + 如果是分布jenkins服务，使用`jenkins_win/jenkins-salves.bat`或者`jenkins_mac/jenkins-salves.sh`运行jenkins子服务。
