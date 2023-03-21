@@ -3,7 +3,8 @@
 ***仅供个人学习使用***
 ## 说明
 通过Jenkins服务使用python语言来对Unity和周边进行构建和自动化操作
-$\underline{尽可能不使用python的库，大多数使用的命令行，避免Jenkins有多台节点机器时，复杂麻烦的python环境，docker暂时没去研究}$
+
+~尽可能不使用python的库，大多数使用的命令行，避免Jenkins有多台节点机器时，复杂麻烦的python环境，docker暂时没去研究~
 - - -
 ## 环境
 + Python 3.7+ [Python官网地址](https://www.python.org/)
