@@ -27,9 +27,6 @@
 + `auto_build_patch.py`
     >- 构建unity热更资源
 
-+ `auto_collect_shader_variant.py`
-    >- 收集并提交unity中的shader variant
-
 + `auto_flush.py`
     >- 刷新cdn资源
 
