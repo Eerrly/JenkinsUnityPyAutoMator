@@ -13,6 +13,7 @@ from utils.tail_util import TailHelper
 from utils.unity_util import UnityHelper
 from utils.vpn_util import VPNHelper
 from utils.xcode_util import XCodeHelper
+from utils.aws_util import AWSHelper
 
 svn = None
 vpn = None
@@ -25,6 +26,7 @@ xcode = None
 flush = None
 gradle = None
 cos = None
+aws = None
 
 
 def console(_message, *_params):
@@ -286,3 +288,12 @@ def init_cos(_secretId, _secretKey, _bucket, _region):
     cos = cos or COSHelper(_secretId, _secretKey, _bucket, _region)
     console(cos)
     return cos
+
+
+def init_aws():
+    """ Init AWScmd Class
+    """
+    global aws
+    aws = aws or AWSHelper()
+    console(aws)
+    return aws
