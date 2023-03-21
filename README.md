@@ -79,11 +79,12 @@
     >- 切平台，前台或者后台执行方法
 + `utils/xcode_util.py`
     >- 构建xcode工程，修改plist文件
-+ `utils/vpn_utils.py`
++ `utils/vpn_util.py`
     >- mac机器上的vpn开启和关闭
-+ `utils/cos_utils.py`
++ `utils/cos_util.py`
     >- 利用cosmod上传资源至腾讯云储存
----
++ `utils/aws_util.py`
+    >- 利用aws上传资源至亚马逊储存桶
 <br>
-
+- - -
 [^aab]:android app bundle - <https://developer.android.com/guide/app-bundle>
