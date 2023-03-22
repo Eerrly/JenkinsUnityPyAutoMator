@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import subprocess
 import sys
 from enum import Enum
@@ -10,9 +11,7 @@ class COSCMD(Enum):
 
 
 class COSHelper:
-    """
-    COS CMD
-    """
+    """ 腾讯云 COS 工具类 """
     def __init__(self, secretId, secretKey, bucket, region):
         self.secretId = secretId
         self.secretKey = secretKey
@@ -38,11 +37,26 @@ class COSHelper:
         sys.stdout.flush()
 
     def config(self):
+        """配置
+        配置COS
+        """
         self.__function(COSCMD.Config)
 
     def upload(self, _local_path, _remote_path):
+        """上传文件
+        上传本地文件到远端文件
+
+        Args:
+            _local_path: 本地文件路径
+            _remote_path: 远端文件路径
+        """
         self.__function(COSCMD.Upload, _local_path, _remote_path)
 
     def delete(self, _remote_path):
-        # If it is a directory, end with '/'
+        """删除文件
+        删除远端文件，如果是文件夹，路径后面有'/'
+
+        Args:
+            _remote_path: 远端文件路径
+        """
         self.__function(COSCMD.Delete, _remote_path)

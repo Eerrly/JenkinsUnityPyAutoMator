@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import ftplib
 import os
 import sys
@@ -7,7 +8,7 @@ _total_size = 0
 
 
 class FTPHelper:
-
+    """ FTP 工具类 """
     def __init__(self, _host, _port, _user, _passwd, _debug_lv=0, _buf_size=1024 * 1024):
         self.buf_size = _buf_size
         self.host = _host
@@ -68,6 +69,7 @@ class FTPHelper:
         self.ftp.cwd(_path)
 
     def quit(self):
+        """退出FTP"""
         self.ftp.quit()
 
     def upload_file(self, _local_file, _f):
@@ -121,6 +123,14 @@ class FTPHelper:
         self.ftp.cwd("..")
 
     def upload(self, _remote, _local, _delete=False):
+        """上传文件
+        上传本地到远端
+
+        Args:
+            _remote: 远端文件夹或者文件
+            _local: 本地文件夹或者文件
+            _delete: 是否删除需要上传的远端路径下的其他文件
+        """
         _remote = _remote.replace("\\", "/")
         _local = _local.replace("\\", "/")
         sys.stdout.write("remote > %s ... \nlocal > %s\n" % (_remote, _local))

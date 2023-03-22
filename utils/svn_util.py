@@ -15,7 +15,7 @@ class SVN(Enum):
 
 
 class SVNHelper:
-
+    """SVN工具类"""
     def __init__(self, _user, _password, _path, _clean_path=None):
         self.user = _user
         self.password = _password
@@ -52,12 +52,33 @@ class SVNHelper:
         self.__function(SVN.ResolveWorking)
 
     def diff(self, _lv, _rv, _out_file=None):
+        """获取差异文件
+        通过SVN获取差异文件
+
+        Args:
+            _lv: SVN起始版本
+            _rv: SVN结束版本
+            _out_file: 导出文件路径
+        """
         return self.__function(SVN.Diff, _lv=_lv, _rv=_rv, _out_file=_out_file)
 
     def status(self, _file_path):
+        """获取文件状态
+        通过SVN获取文件状态
+
+        Args:
+            _file_path: 文件路径
+        """
         return self.__function(SVN.Status, _file_path=_file_path)
 
     def commit(self, _file_path, _commit_message):
+        """提交文件
+        通过SVN提交文件
+
+        Args:
+            _file_path: 文件路径
+            _commit_message: 提交信息
+        """
         return self.__function(SVN.Commit, _file_path=_file_path, _commit_message=_commit_message)
 
     def update(self):

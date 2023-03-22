@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import subprocess
 import sys
 from enum import Enum
@@ -9,7 +10,7 @@ class AWSCMD(Enum):
 
 
 class AWSHelper:
-
+    """ 亚马逊 AWS S3 工具类 """
     def __init__(self):
         sys.stdout.write("nothing to init.")
         sys.stdout.flush()
@@ -30,7 +31,20 @@ class AWSHelper:
         sys.stdout.flush()
 
     def upload(self, local_path, remote_path):
+        """ 上传文件
+        上传本地文件到远端文件，有会覆盖
+
+        Args:
+            local_path: 本地文件
+            remote_path: 远端文件
+        """
         self.__function(AWSCMD.Upload, local_path, remote_path)
 
     def delete(self, remote_path):
+        """ 删除文件
+        删除远端文件，没有不会报错
+
+        Args:
+            remote_path: 远端文件
+        """
         self.__function(AWSCMD.Delete, _remote_path=remote_path)

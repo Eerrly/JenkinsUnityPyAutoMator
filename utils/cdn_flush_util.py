@@ -1,3 +1,4 @@
+# -*- coding: UTF-8 -*-
 import sys
 from enum import Enum
 
@@ -10,7 +11,7 @@ class FlushType(Enum):
 
 
 class CDNFlushHelper:
-
+    """ 刷新CDN 工具类 """
     def __init__(self, _url, _headers, _user, _pass, _pad, _path=None, _email=None):
         self.url = _url
         self.headers = _headers
@@ -30,8 +31,11 @@ class CDNFlushHelper:
             sys.stdout.flush()
         else:
             raise Exception(response.text)
-    
+
     def flush(self):
+        """ 刷新
+        刷新CDN 通过requests的方式
+        """
         __type = FlushType.All if self.path is None else FlushType.Item
         __data = ["user=" + self.user, "pass=" + self.passwd, "pad=" + self.pad, "type=" + __type.value]
         if self.path is not None:
