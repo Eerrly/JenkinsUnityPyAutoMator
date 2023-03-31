@@ -5,21 +5,24 @@ from enum import Enum
 
 
 class AWSCMD(Enum):
-    Upload = "aws s3 cp {local_path} s3://jielan2-usa-storage-bucket/{remote_path}"
-    Delete = "aws s3 rm s3://jielan2-usa-storage-bucket/{remote_path}"
+    Upload = "aws s3 cp {local_path} s3://{bucket_url}/{remote_path}"
+    Delete = "aws s3 rm s3://{bucket_url}/{remote_path}"
 
 
 class AWSHelper:
     """ 亚马逊 AWS S3 工具类 """
-    def __init__(self):
-        sys.stdout.write("nothing to init.")
-        sys.stdout.flush()
+    def __init__(self, bucket_url):
+        """ 初始化
+        Args:
+            bucket_url: 桶的链接 s3://bucket_url
+        """
+        self.bucket_url = bucket_url
 
     def __str__(self):
-        return ""
+        return "aws information >\nbucket_url:%s" % self.bucket_url
 
-    def __function(self, _enum, _local_path=None, _remote_path=None, _thread_count=None):
-        _command = _enum.value.format(local_path=_local_path, remote_path=_remote_path, thread_count=_thread_count)
+    def __function(self, _enum, _local_path=None, _remote_path=None, _bucket_url=None):
+        _command = _enum.value.format(local_path=_local_path, remote_path=_remote_path, _bucket_url=self.bucket_url)
         sys.stdout.write(_command + "\n")
         sys.stdout.flush()
         _process = subprocess.Popen(_command, shell=True)
