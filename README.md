@@ -17,76 +17,154 @@
     - 关于子jenkins服务的`.jnlp`文件，在jenkins后台配置的时候自行查看下载。
 ## 脚本功能说明
 ### 主功能
-+ `auto_build.py`
-    >- 从Unity构建Win包
-    >- 从Unity构建Android工程，在由Android工程构建相应的Apk或者AAB包
-    >- 从Unity构建Xcode工程
+<details>
+<summary>auto_build.py</summary>
+    
+ - 从Unity构建Win包
+ - 从Unity构建Android工程，在由Android工程构建相应的Apk或者AAB包
+ - 从Unity构建Xcode工程
+</details>
 
-+ `auto_build_ios.py`
-    >- 构建ipa包
-    >- 上传符号表到firebase
+<details>
+<summary>auto_build_ios.py</summary>
+    
+ - 构建ipa包
+ - 上传符号表到firebase
+</details>
 
-+ `auto_build_patch.py`
-    >- 构建unity热更资源
+<details>
+<summary>auto_build_patch.py</summary>
+    
+ - 构建unity热更资源
+</details>
 
-+ `auto_flush.py`
-    >- 刷新cdn资源
+<details>
+<summary>aauto_flush.py</summary>
+    
+ - 刷新cdn资源
+</details>
 
-+ `auto_upload2_cdn.py`
-    >- 上传资源到ftp
-    >- 上传资源到sftp
+<details>
+<summary>auto_upload2_cdn.py</summary>
+    
+ - 上传资源到ftp
+ - 上传资源到sftp
+</details>
 
-+ `auto_upload2_cos.py`
-    >- 上传资源到腾讯云
+<details>
+<summary>auto_upload2_cos.py</summary>
+    
+ - 上传资源到腾讯云
+</details>
 
 ### 配置
-+ `const.py`
-    >- 静态数据信息
-    >- 公共枚举
+<details>
+<summary>const.py</summary>
+    
+ - 静态数据信息
+ - 公共枚举
+</details>
 
-+ `params.py`
-    >- Jenkins初始化参数
-    >- Jenkins脚本传入参数
-    >- 各种路径
-    >- Unity打包所需的自定义参数
-    >- 构建包体所需参数
-    >- 热更所需参数
-    >- 上传资源到cdn所需参数
-    >- 版本参数
-    >- xcode构建所需参数
-    >- 上传资源到腾讯云所需参数
+<details>
+<summary>params.py</summary>
+    
+ - Jenkins初始化参数
+ - Jenkins脚本传入参数
+ - 各种路径
+ - Unity打包所需的自定义参数
+ - 构建包体所需参数
+ - 热更所需参数
+ - 上传资源到cdn所需参数
+ - 版本参数
+ - xcode构建所需参数
+ - 上传资源到腾讯云所需参数
+</details>
 
-+ `func.py`
-    >- 私有函数
+<details>
+<summary>func.py</summary>
+    
+ - 私有函数
+</details>
 
 ### 工具
-+ `util.py`
-    >- 公有工具函数
-    >- 各种工具的初始化函数
-+ `utils/cdn_flush_util.py`
-    >- http请求刷新cdn资源
-+ `utils/ftp_util.py`
-    >- ftp上传资源
-+ `utils/gradle_util.py`
-    >- gradle进行android工程的构建，清理
-+ `utils/jar_util.py`
-    >- jar进行符号表上传，android app bundle[^aab] 的安装
-+ `utils/ssh_util.py`
-    >- sftp上传资源
-+ `utils/svn_util.py`
-    >- svn更新清理还原上传等操作
-+ `utils/tail_util.py`
-    >- tail工具
-+ `utils/unity_util.py`
-    >- 切平台，前台或者后台执行方法
-+ `utils/xcode_util.py`
-    >- 构建xcode工程，修改plist文件
-+ `utils/vpn_util.py`
-    >- mac机器上的vpn开启和关闭
-+ `utils/cos_util.py`
-    >- 利用cosmod上传资源至腾讯云储存
-+ `utils/aws_util.py`
-    >- 利用aws上传资源至亚马逊储存桶
-<br>
+<details>
+<summary>util.py</summary>
+    
+ - 公有工具函数
+ - 各种工具的初始化函数
+</details>
 
+<details>
+<summary>utils/cdn_flush_util.py</summary>
+    
+ - http请求刷新cdn资源
+</details>
+
+<details>
+<summary>utils/ftp_util.py</summary>
+    
+ - ftp上传资源
+</details>
+
+<details>
+<summary>utils/gradle_util.py</summary>
+    
+ - gradle进行android工程的构建，清理
+</details>
+
+<details>
+<summary>utils/jar_util.py</summary>
+    
+ - jar进行符号表上传，android app bundle[^aab] 的安装
+</details>
+
+<details>
+<summary>utils/ssh_util.py</summary>
+    
+ - sftp上传资源
+</details>
+
+<details>
+<summary>utils/svn_util.py</summary>
+    
+ - svn更新清理还原上传等操作
+</details>
+
+<details>
+<summary>utils/tail_util.py</summary>
+    
+ - tail工具
+</details>
+
+<details>
+<summary>utils/unity_util.py</summary>
+    
+ - 切平台，前台或者后台执行方法
+</details>
+
+<details>
+<summary>utils/xcode_util.py</summary>
+    
+ - 构建xcode工程，修改plist文件
+</details>
+
+<details>
+<summary>utils/vpn_util.py</summary>
+    
+ - mac机器上的vpn开启和关闭
+</details>
+
+<details>
+<summary>utils/cos_util.py</summary>
+    
+ - 利用cosmod上传资源至腾讯云储存
+</details>
+
+<details>
+<summary>utils/aws_util.py</summary>
+    
+ - 利用aws上传资源至亚马逊储存桶
+</details>
+
+### 引用
 [^aab]:android app bundle - <https://developer.android.com/guide/app-bundle>
