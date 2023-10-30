@@ -35,5 +35,11 @@ def main_function():
 
 if __name__ == "__main__":
     util.console((" start time : %s " % time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())).center(200, "#"))
-    main_function()
+    ERROR_LEVEL = 0
+    try:
+        main_function()
+    except Exception as e:
+        util.console(u"Error : %s !" % repr(e))
+        ERROR_LEVEL = 1
     util.console((" end time : %s " % time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())).center(200, "#"))
+    exit(ERROR_LEVEL)
