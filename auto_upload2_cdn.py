@@ -16,6 +16,9 @@ _local_directory_format = "{time}\\FreeStyle\\{version}"
 
 
 def init_jenkins_params():
+    """
+    初始化自动化构建所需的各种参数
+    """
     util.console(" call Init Static Params start ".center(200, "#"))
     global jenkins_params, cdn_params
     jenkins_params = params.JenkinsClass()
@@ -24,6 +27,9 @@ def init_jenkins_params():
 
 
 def merger_patch():
+    """
+    合并热更成一个压缩包
+    """
     util.console(" call merge patch start ".center(200, "#"))
     __unzip_files_dic = {}
     for __file_name in os.listdir(jenkins_params.WORKSPACE):
@@ -63,6 +69,9 @@ def merger_patch():
 
 
 def get_local_path():
+    """
+    获取本地需要上传的文件路径
+    """
     __local = ""
     if const.UploadType[cdn_params.upload_type] == const.UploadType.Zip:
         __local = util.unzip(os.path.join(jenkins_params.WORKSPACE, "upload.zip"))
@@ -90,6 +99,9 @@ def get_local_path():
 
 
 def get_remote_list():
+    """
+    获取远端上传的文件路径地址
+    """
     __remote_list = []
     if cdn_params.upload_channel_list != "" and len(cdn_params.upload_channel_list.split("*")) > 0:
         if const.UploadType[cdn_params.upload_type] != const.UploadType.Main and const.UploadType[cdn_params.upload_type] != const.UploadType.Patch:
@@ -116,6 +128,9 @@ def get_remote_list():
 
 
 def upload():
+    """
+    上传逻辑
+    """
     util.console(" call upload assets to cdn start ".center(200, "#"))
 
     __local = get_local_path()
@@ -165,6 +180,9 @@ def upload():
 
 
 def main_function():
+    """
+    主函数
+    """
     init_jenkins_params()
     upload()
 

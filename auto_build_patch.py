@@ -16,6 +16,9 @@ sys_params = params.SystemClass
 
 
 def init_jenkins_params():
+    """
+    初始化自动化构建所需的各种参数
+    """
     util.console(" call Init Static Params start ".center(200, "#"))
     global jenkins_params, path_params, patch_params, sys_params
     jenkins_params = params.JenkinsClass()
@@ -28,6 +31,9 @@ def init_jenkins_params():
 
 
 def auto_build_patch():
+    """
+    开始执行热更自动化构建
+    """
     util.console(" auto unity build patch start ".center(200, "#"))
 
     time.sleep(10)
@@ -63,6 +69,9 @@ def auto_build_patch():
 
 
 def update_unity_project():
+    """
+    SVN清理、还原、更新操作
+    """
     util.console(" svn clean revert update start ".center(200, "#"))
     __svn = util.init_svn(const.CONST_SVN_USERNAME, const.CONST_SVN_PASSWORD, path_params.PROJECT_PATH, path_params.CLEAN_PATH)
     __svn.clean_revert_update()
@@ -70,6 +79,9 @@ def update_unity_project():
 
 
 def init_svn_diff_txt():
+    """
+    初始化SVN差异文件列表导出到一个txt文本里
+    """
     util.console(" call svn diff start ".center(200, "#"))
     _svnDiffTxtPath = "{project_path}\\Client\\OutSVNDiff.txt".format(project_path=path_params.PROJECT_PATH)
     _svnDiffTxtFile = open(_svnDiffTxtPath, 'w')
@@ -80,6 +92,9 @@ def init_svn_diff_txt():
 
 
 def copy_patch_zip_to_artifact():
+    """
+    拷贝热更压缩包到Jenkins存档文件夹中
+    """
     util.console(" copy Patch_*.zip to artifact start ".center(200, "#"))
     jenkins_targetPath = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
 
@@ -99,6 +114,9 @@ def copy_patch_zip_to_artifact():
 
 
 def main_function():
+    """
+    主函数
+    """
     init_jenkins_params()
     if util.get_free_space_mb("C:\\") < const.WIN_MAX_DISK:
         raise Exception("No space left c: disk!")
