@@ -29,6 +29,9 @@ sys_params = params.SystemClass
 
 
 def svn_clean_revert_update():
+    """
+    SVN清理、还原、更新操作
+    """
     util.console(" svn clean revert update start ".center(200, "#"))
     if build_params.disableSvnUpdateCleanUnityProject == "true":
         util.console(">>> skip svn clean revert update.")
@@ -39,6 +42,9 @@ def svn_clean_revert_update():
 
 
 def init_jenkins_params():
+    """
+    初始化自动化构建所需的各种参数
+    """
     util.console(" call init jenkins params start ".center(200, "#"))
 
     global platform, jenkins_params, build_params, unity_params, path_params, sys_params
@@ -65,6 +71,9 @@ def init_jenkins_params():
 
 
 def auto_build():
+    """
+    Unity构建逻辑
+    """
     util.console(" unity auto build start ".center(200, "#"))
     _executeMethodName = "AutoBuild.AutoBuildPackage"
 
@@ -101,6 +110,11 @@ def auto_build():
 
 
 def __copy_to_artifact_path(_zip_file):
+    """
+    拷贝压缩包到Jenkins存档文件夹中
+    Args:
+        _zip_file: 压缩文件路径
+    """
     __jenkins_target_path = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
     util.console("jenkins_target_path : " + __jenkins_target_path + ", _zip_file : " + _zip_file)
     __copy_path = os.path.join(__jenkins_target_path, os.path.basename(_zip_file))
@@ -108,12 +122,18 @@ def __copy_to_artifact_path(_zip_file):
 
 
 def copy_main_zip_to_artifact():
+    """
+    拷贝主资源压缩包到Jenkins存档文件夹中
+    """
     util.console(" copy main.zip to artifact start ".center(200, "#"))
     __copy_to_artifact_path(path_params.MAIN_ZIP_PATH)
     util.console(" copy main.zip to artifact end ".center(200, "#"))
 
 
 def copy_windows_exe_to_share():
+    """
+    拷贝WindowExe程序到共享文件夹中
+    """
     util.console(" copy windows exe to share start ".center(200, "#"))
     __desktop_Path = os.path.join(os.path.expanduser("~"), 'Desktop')
     __outputs_path = os.path.join(path_params.PROJECT_PATH, "output")
@@ -136,6 +156,9 @@ def copy_windows_exe_to_share():
 
 
 def copy_android_apk_to_share():
+    """
+    拷贝AndroidApk到共享文件夹中
+    """
     util.console(" copy android apk to share start ".center(200, "#"))
     # copy outputs to share dir
     __desktop_Path = os.path.join(os.path.expanduser("~"), 'Desktop')
@@ -157,6 +180,9 @@ def copy_android_apk_to_share():
 
 
 def replace_android_studio_assets():
+    """
+    替换Android工程内的文件
+    """
     util.console(" replace android studio assets start ".center(200, "#"))
     __output_path = os.path.join(path_params.PROJECT_PATH, "output")
     __output_time = os.path.getmtime(__output_path)
@@ -216,6 +242,11 @@ def replace_android_studio_assets():
 
 
 def __replace_android_icon(__launcher_main_path):
+    """
+    替换Android工程内的Icon
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+    """
     __android_res_path = os.path.join(__launcher_main_path, "res")
     __icon_path = os.path.join(path_params.PROJECT_PATH, "Android_Tools\\icon")
     __icon_channel_path = os.path.join(path_params.PROJECT_PATH, "Android_Tools\\icon_%s", build_params.androidChannel)
@@ -226,6 +257,9 @@ def __replace_android_icon(__launcher_main_path):
 
 
 def __modify_android_version():
+    """
+    修改Android工程里的AndroidVersion
+    """
     if build_params.androidVersion != "" and len(build_params.androidVersion.split("*")) == 2:
         __version_code = build_params.androidVersion.split("*")[0]
         __version_name = build_params.androidVersion.split("*")[1]
@@ -238,6 +272,12 @@ def __modify_android_version():
 
 
 def __replace_branch_kr(__launcher_main_path, __unitylibrary_main_path):
+    """
+    韩服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __replace_android_icon(__launcher_main_path)
     __unity_main_path = ""
     # Unity2019 The directory structure has changed
@@ -264,6 +304,12 @@ def __replace_branch_kr(__launcher_main_path, __unitylibrary_main_path):
 
 
 def __replace_branch_cn(__launcher_main_path, __unitylibrary_main_path):
+    """
+    国服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __android_res_path = os.path.join(__launcher_main_path, "res")
     if build_params.enableOfficial == "true" or build_params.enableBlend == "true":
         __icon_path = os.path.join(path_params.PROJECT_PATH, "Android_Tools\\icon_official" if build_params.enableOfficial == "true" else "Android_Tools\\icon_blend")
@@ -289,6 +335,12 @@ def __replace_branch_cn(__launcher_main_path, __unitylibrary_main_path):
 
 
 def __replace_branch_jp(__launcher_main_path, __unitylibrary_main_path):
+    """
+    日服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __unity_main_path = ""
     # Unity2019 The directory structure has changed
     if sys_params.UNITY_VERSION and sys_params.UNITY_VERSION == "2019":
@@ -300,6 +352,12 @@ def __replace_branch_jp(__launcher_main_path, __unitylibrary_main_path):
 
 
 def __replace_branch_tw(__launcher_main_path, __unitylibrary_main_path):
+    """
+    台服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __unity_main_path = ""
     # Unity2019 The directory structure has changed
     if sys_params.UNITY_VERSION and sys_params.UNITY_VERSION == "2019":
@@ -311,20 +369,45 @@ def __replace_branch_tw(__launcher_main_path, __unitylibrary_main_path):
 
 
 def __replace_branch_sa(__launcher_main_path, __unitylibrary_main_path):
+    """
+    东南亚服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __replace_branch_cn(__launcher_main_path, __unitylibrary_main_path)
     __replace_android_icon(__launcher_main_path)
 
 
 def __replace_branch_na(__launcher_main_path, __unitylibrary_main_path):
+    """
+    美服渠道的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __replace_branch_cn(__launcher_main_path, __unitylibrary_main_path)
     __replace_android_icon(__launcher_main_path)
 
 
 def __replace_branch_default(_launcher_main_path, __unitylibrary_main_path):
+    """
+    默认的替换逻辑
+    Args:
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     __replace_branch_cn(_launcher_main_path, __unitylibrary_main_path)
 
 
 def __replace_branch(_case, __launcher_main_path, __unitylibrary_main_path):
+    """
+    根据不同渠道进行Android工程文件替换
+    Args:
+        _case: 渠道
+        __launcher_main_path: Android工程的主Module文件夹路径
+        __unitylibrary_main_path: Android工程的UnityLibrary文件夹路径
+    """
     functions = {
         "kr": __replace_branch_kr,
         "cn": __replace_branch_cn,
@@ -338,6 +421,9 @@ def __replace_branch(_case, __launcher_main_path, __unitylibrary_main_path):
 
 
 def special_treatment_for_each_channel_in_android():
+    """
+    根据不同渠道进行Android工程文件替换
+    """
     util.console(" special treatment for each channel start ".center(200, "#"))
     __launcher_main_path = ""
     __unitylibrary_main_path = ""
@@ -356,6 +442,9 @@ def special_treatment_for_each_channel_in_android():
 
 
 def start_android_studio_build():
+    """
+    开始进行AndroidStudio工程构建
+    """
     util.console(" android studio build start ".center(200, "#"))
     __gradle = util.init_gradle(path_params.GRADLE_PATH, path_params.ANDROID_STUDIO_PATH)
     __gradle.Clean()
@@ -367,6 +456,9 @@ def start_android_studio_build():
 
 
 def build_appbundle_apk():
+    """
+    开始进行AndroidStudio工程构建AAB或者APK
+    """
     util.console(" build android app bundle to apk start ".center(200, "#"))
     if path_params.KEYSTORE_PATH == "" or path_params.BUILD_GRADLE_PATH == "":
         return
@@ -430,6 +522,9 @@ def build_appbundle_apk():
 
 
 def zip_xcode_project_to_artifact():
+    """
+    压缩Unity导出的Xcode工程到Jenkins存档文件夹中
+    """
     util.console(" zip xcode project to artifact start ".center(200, "#"))
     __ios_build = os.path.join(path_params.PROJECT_PATH, "IOSBuild")
     __output_time = os.path.getmtime(__ios_build)
@@ -441,6 +536,9 @@ def zip_xcode_project_to_artifact():
 
 
 def start_build():
+    """
+    开始自动化构建
+    """
     util.console(" build start ".center(200, "#"))
     if util.get_free_space_mb("C:\\") < const.WIN_MAX_DISK:
         raise Exception("No space left c: disk!")
@@ -462,6 +560,9 @@ def start_build():
 
 
 def main_function():
+    """
+    主函数
+    """
     init_jenkins_params()
     svn_clean_revert_update()
     start_build()

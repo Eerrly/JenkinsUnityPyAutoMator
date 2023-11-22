@@ -18,6 +18,11 @@ xcode_params = params.XCodeClass
 
 
 def __get_entitlements(__xcode_project_path):
+    """
+    获取Xcode Entitlements文件
+    Args:
+        __xcode_project_path: Xcode工程路径
+    """
     __project_pbx = os.path.join(__xcode_project_path, "Unity-iPhone.xcodeproj/project.pbxproj")
     __entitlements = ""
     with io.open(__project_pbx, 'r', encoding='utf-8') as rf:
@@ -26,6 +31,14 @@ def __get_entitlements(__xcode_project_path):
 
 
 def __chmod(__file, __permission=0o777):
+    """
+    调用Linux命令行的chmod命令
+    Args:
+        __file: 需要赋予权限的文件
+        __permission: 读写权限
+    Returns:
+        是否存在这个文件
+    """
     util.console("chmod '%s'", __file)
     if os.path.exists(__file):
         os.chmod(__file, __permission)
@@ -36,12 +49,22 @@ def __chmod(__file, __permission=0o777):
 
 
 def __check_path_exists(__path):
+    """
+    检测文件路径是否存在
+    Args:
+        __path: 文件路径
+    Returns:
+        文件路径是否存在
+    """
     if not os.path.exists(__path):
         raise Exception("'%s' can not found!", __path)
     return True
 
 
 def init_jenkins_params():
+    """
+    初始化自动化构建所需的各种参数
+    """
     util.console(" call Init Static Params start ".center(200, "#"))
 
     global IOS_TOOLS_PATH, SHARE_PATH, jenkins_params, xcode_params
@@ -64,7 +87,12 @@ def init_jenkins_params():
 
 
 def modify_xcode_project(__xcode, __xcode_project_path):
-
+    """
+    修改Xcode的设置与参数
+    Args:
+        __xcode: xcode_util对象
+        __xcode_project_path: Xcode工程路径
+    """
     # Change ShortVersion And Version
     if xcode_params.xcode_version_build != "" and len(xcode_params.xcode_version_build.split("*")) == 2:
         __xcode.PlistBuddyShortVersion(xcode_params.xcode_version_build.split("*")[0])
@@ -85,6 +113,13 @@ def modify_xcode_project(__xcode, __xcode_project_path):
 
 
 def export_ipa_callback(__xcode, __xcode_project_path, __archivePath):
+    """
+    导出Ipa之后的操作处理
+    Args:
+        __xcode: xcode_util对象
+        __xcode_project_path: Xcode工程路径
+        __archivePath: Xcode工程archive的目标路径
+    """
     # upload firebase dsym file
     __firebaseCrashlytics = os.path.join(
         __xcode_project_path,
@@ -119,6 +154,9 @@ def export_ipa_callback(__xcode, __xcode_project_path, __archivePath):
 
 
 def xcode_build():
+    """
+    Xcode构建逻辑
+    """
     util.console(" call xcode build start ".center(200, "#"))
 
     __xcode_project_path = util.unzip(os.path.join(jenkins_params.WORKSPACE, "IOSBuild.zip"))
@@ -161,6 +199,9 @@ def xcode_build():
 
 
 def copy_outputs_to_share():
+    """
+    将导出的ipa拷贝到共享文件夹中
+    """
     util.console(" copy ipa to output start ".center(200, "#"))
     # copy outputs to share dir
     __outputs = os.path.join(jenkins_params.WORKSPACE, "app-%s.ipa" % xcode_params.buildType)
@@ -170,6 +211,9 @@ def copy_outputs_to_share():
 
 
 def main_function():
+    """
+    主函数
+    """
     init_jenkins_params()
     if os.path.exists("/Users/lmd/Library/Developer/Xcode/DerivedData") and util.get_free_space_mb("/Users/lmd/Library/Developer/Xcode/DerivedData") < const.MAC_MAX_DISK:
         raise Exception("No space left /Users/lmd/Library/Developer/Xcode/DerivedData!")
