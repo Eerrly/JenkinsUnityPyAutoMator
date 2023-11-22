@@ -22,6 +22,14 @@ class AWSHelper:
         return "aws information >\nbucket_url:%s" % self.bucket_url
 
     def __function(self, _enum, _local_path=None, _remote_path=None, _bucket_url=None):
+        """
+        执行方法
+        Args:
+            _enum: 枚举类型
+            _local_path: 本地文件
+            _remote_path: 远端文件
+            _bucket_url: 桶的链接 s3://bucket_url
+        """
         _command = _enum.value.format(local_path=_local_path, remote_path=_remote_path, _bucket_url=self.bucket_url)
         sys.stdout.write(_command + "\n")
         sys.stdout.flush()

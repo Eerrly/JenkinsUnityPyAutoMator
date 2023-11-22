@@ -9,9 +9,14 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='gb18030')
 
 class TailHelper(Thread):
     """
-    Real time synchronization of unity log
+    Trail工具类
     """
     def __init__(self, filename):
+        """
+        初始化Trail工具类
+        Args:
+            filename: 文件名
+        """
         open(filename, 'w').close()  # clear txt
         self._filename = filename
         self._stop_reading = False
@@ -21,6 +26,9 @@ class TailHelper(Thread):
         return "tail information >\n_filename:%s" % self._filename
 
     def run(self):
+        """
+        执行方法
+        """
         while not os.path.exists(self._filename):
             time.sleep(0.1)
         file = self.open_default_encoding(self._filename, mode='r')
@@ -35,6 +43,9 @@ class TailHelper(Thread):
                 sys.stdout.flush()
 
     def stop(self):
+        """
+        停止
+        """
         self._stop_reading = True
         self.join(5)
 

@@ -11,8 +11,16 @@ class GRADLE(Enum):
 
 
 class GradleHelper:
-    """Gradle 工具类"""
+    """
+    Gradle 工具类
+    """
     def __init__(self, _gradle_path, _android_project_path):
+        """
+        初始化Gradle工具类
+        Args:
+            _gradle_path: Gradle路径
+            _android_project_path: Android Project工程路径
+        """
         self.gradle_path = _gradle_path
         self.android_project_path = _android_project_path
 
@@ -20,6 +28,12 @@ class GradleHelper:
         return "gradle information >\ngradle_path:%s\nandroid_project_path:%s" % (self.gradle_path, self.android_project_path)
 
     def __function(self, _enum, _build_type=None):
+        """
+        执行方法
+        Args:
+            _enum: 枚举类型
+            _build_type: 构建类型（Release/Debug）
+        """
         _command = _enum.value.format(gradle_path=self.gradle_path, android_project_path=self.android_project_path, build_type=_build_type)
         sys.stdout.write(_command + "\n")
         sys.stdout.flush()
@@ -31,11 +45,13 @@ class GradleHelper:
         sys.stdout.flush()
 
     def Clean(self):
-        """清除Android Project工程"""
+        """
+        清除Android Project工程
+        """
         self.__function(GRADLE.Clean)
 
     def Bundle(self, _build_type):
-        """构建
+        """
         构建Assets Bundle包
 
         Args:
@@ -44,7 +60,7 @@ class GradleHelper:
         self.__function(GRADLE.Bundle, _build_type=_build_type.capitalize())
 
     def Assemble(self, _build_type):
-        """构建
+        """
         构建APK包
 
         Args:

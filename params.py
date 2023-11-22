@@ -5,6 +5,14 @@ import util
 
 
 class JenkinsClass:
+    """
+    Jenkins参数类
+    Attributes:
+        WORKSPACE: Jenkins工作目录
+        JENKINS_HOME: Jenkins主目录
+        JOB_NAME: Jenkins任务名称
+        BUILD_NUMBER: Jenkins构建编号
+    """
     WORKSPACE = ""
     JENKINS_HOME = ""
     JOB_NAME = ""
@@ -22,6 +30,16 @@ class JenkinsClass:
 
 
 class SystemClass:
+    """
+    系统参数类
+    Attributes:
+        UNITY_EXE: Unity.exe路径
+        UNITY_PROJECT: Unity工程路径
+        UNITY_USER_NAME: Unity用户名
+        UNITY_USER_PASSWORD: Unity用户密码
+        UNITY_USER_SERIAL: Unity用户序列号
+        UNITY_VERSION: Unity版本号
+    """
     UNITY_EXE = ""
     UNITY_PROJECT = ""
     UNITY_USER_NAME = ""
@@ -49,6 +67,28 @@ class SystemClass:
 
 
 class PathClass:
+    """
+    路径参数类
+    Attributes:
+        UNITY_EXE: Unity.exe路径
+        PROJECT_PATH: Unity工程路径
+        PATCH_PATH: 热更工程路径
+        ANDROID_STUDIO_PATH: Android Studio工程路径
+        ANDROID_APP_PATH: Android Studio App工程路径
+        INSTALL_TIME_ASSET_PACK_PATH: Android Studio InstallTimeAssetPack工程路径
+        GRADLE_PATH: Android Studio Gradle路径
+        CLEAN_PATH: 清理路径
+        UNITY_LOG_PATH: Unity日志路径
+        SYMBOLS_ZIP_PATH: Symbols.zip路径
+        LIB_IL2CPP_SO_PATH: libil2cpp.so路径
+        UPLOAD_SYMBOLS_JAR_PATH: 上传Symbols.jar路径
+        BUNDLE_TOOL_JAR_PATH: BundleTool.jar路径
+        MAIN_ZIP_PATH: Main.zip路径
+        KEYSTORE_PATH: KeyStore路径
+        BUILD_GRADLE_PATH: Build.gradle路径
+        ANDROID_LAUNCHER_PATH: Android Launcher路径
+        ANDROID_UNITYLIBRARY_PATH: Android UnityLibrary路径
+    """
     UNITY_EXE = ""
     PROJECT_PATH = ""
     PATCH_PATH = ""
@@ -102,6 +142,21 @@ class PathClass:
 
 
 class UnityClass:
+    """
+    Unity参数类
+    Attributes:
+        enableGM: 是否开启GM
+        enableGuide: 是否开启新手引导
+        enableSDK: 是否开启SDK
+        enableConsole: 是否开启Console
+        enableLog: 是否开启Log
+        enablePatching: 是否开启热更
+        loginServer: 登录服务器
+        enableQAServerCDN: 是否开启QA服务器CDN
+        enableFPS: 是否开启FPS
+        isAuthenticationServer: 是否是战斗校验服务器
+        enableBuildResources: 是否开启资源打包
+    """
     enableGM = ""
     enableGuide = ""
     enableSDK = ""
@@ -135,6 +190,22 @@ class UnityClass:
 
 
 class BuildClass:
+    """
+    构建参数类
+    Attributes:
+        channel: 渠道
+        enableAndroidAppBundle: 是否开启AndroidAppBundle模式
+        buildType: 构建类型
+        buildTarget: 构建目标
+        startBuildingDirectly: 是否直接开始构建
+        enableUniversal: 是否开启Universal模式
+        disableSvnUpdateCleanUnityProject: 是否跳过svn更新和清理Unity工程
+        androidChannel: Android工程渠道
+        androidVersion: Android工程版本号
+        targetSdkVersion: Android工程targetSdkVersion
+        enableOfficial: 是否开启官服
+        enableBlend: 是否开启混服
+    """
     channel = ""
 
     enableAndroidAppBundle = ""
@@ -177,6 +248,19 @@ class BuildClass:
 
 
 class PatchClass:
+    """
+    热更参数类
+    Attributes:
+        empty_patch: 是否空热更
+        clean_update_project: 是否清理更新工程
+        channel: 渠道
+        platform: 平台
+        patch_version: 热更版本号
+        start_svn_version: 开始svn版本号
+        end_svn_version: 结束svn版本号
+        version: 版本号
+        no_safe_fast: 是否跳过安全检查
+    """
     empty_patch = ""
     clean_update_project = ""
     channel = ""
@@ -205,6 +289,19 @@ class PatchClass:
 
 
 class CDNClass:
+    """
+    CDN参数类
+    Attributes:
+        version: 版本号
+        channel: 渠道
+        upload_type: 上传类型
+        patch_type: 热更类型
+        delete_other: 是否删除其他版本
+        cdn_address: CDN地址
+        account_information: 账号信息
+        remote_path: 远程路径
+        upload_channel_list: 上传渠道列表
+    """
     version = ""
     channel = ""
     upload_type = ""
@@ -237,6 +334,21 @@ class CDNClass:
 
 
 class VersionClass:
+    """
+    版本号相关参数类
+    Attributes:
+        version: 版本号
+        modify_type: 修改类型
+        cdn_address: CDN地址
+        account_information: 账号信息
+        modify_path: 修改路径
+        platform: 平台
+        all_platform_modify_field: 所有平台修改字段
+        all_platform_modify_value: 所有平台修改目标值
+        platform_modify_info: 平台修改信息
+        is_check: 是否是check文件
+        check_value: check文件值
+    """
     version = ""
     modify_type = ""
     cdn_address = ""
@@ -276,6 +388,23 @@ class VersionClass:
 
 
 class XCodeClass:
+    """
+    Xcode参数类
+    Attributes:
+        channel: 渠道
+        buildType: 构建类型
+        export_options_plist_name: 导出选项名称
+        xcode_version_build: Xcode版本号
+        CODE_SIGN_IDENTITY: 证书
+        PROVISIONING_PROFILE: 描述文件
+        PROVISIONING_PROFILE_SPECIFIER: 描述文件名称
+        DEVELOPMENT_TEAM: 开发团队
+        APP: APP名称
+        enable_apple_sign: 是否开启苹果签名
+        upload_symbols: 是否上传符号表
+        bundle_identifier: 包名
+        automatic: 是否自动化
+    """
     channel = ""
     buildType = ""
     export_options_plist_name = ""
@@ -320,6 +449,16 @@ class XCodeClass:
 
 
 class COSClass:
+    """
+    Cos参数类
+    Attributes:
+        version: 版本号
+        secretId: secretId
+        secretKey: secretKey
+        bucket: 桶
+        region: 地区
+        remote_path: 远程路径
+    """
     version = ""
     secretId = ""
     secretKey = ""

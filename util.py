@@ -30,96 +30,100 @@ aws = None
 
 
 def console(_message, *_params):
-    """ Console.
-
-    Log Printing
-
-    :param _message: Message
-    :param _params: Params
-    :return:
+    """
+    控制台输出
+    Args:
+        _message: 输出信息
+        *_params: 输出参数
     """
     func.__console(_message, *_params)
 
 
 def unzip(_src_path, _dst_path=None):
-    """ Unpacking.
-
-    UnPacking
-
-    :param _src_path: Source Path
-    :param _dst_path: Target Path
-    :return:
+    """
+    解压缩
+    Args:
+        _src_path: 源文件路径
+        _dst_path: 目标文件路径
+    Returns:
+        解压后的文件路径
     """
     return func.__unzip(_src_path, _dst_path)
 
 
 def zip(_src_path, _dst_path=None):
-    """ Packing.
-
-    Packing
-
-    :param _src_path: Source Path
-    :param _dst_path: Target Path
-    :return:
+    """
+    压缩
+    Args:
+        _src_path: 源文件路径
+        _dst_path: 目标文件路径
+    Returns:
+        压缩后的文件路径
     """
     return func.__zip(_src_path, _dst_path)
 
 
 def copytree(src, dst, symlinks=False, ignore=None, copy_function=shutil.copy2, ignore_dangling_symlinks=False):
-    """ Copy Folder To.
-
-    The original method will report an error if there is no target directory
-
-    :param src:
-    :param dst:
-    :param symlinks:
-    :param ignore:
-    :param copy_function:
-    :param ignore_dangling_symlinks:
-    :return:
+    """
+    复制文件夹
+    Args:
+        src: 源文件夹
+        dst: 目标文件夹
+        symlinks: 是否复制链接
+        ignore: 忽略文件
+        copy_function: 复制方法
+        ignore_dangling_symlinks: 忽略链接
+    Returns:
+        复制后的文件夹
     """
     return func.__copytree(src, dst, symlinks, ignore, copy_function, ignore_dangling_symlinks)
 
 
 def move(__src_path, __dst_path, __cover=False):
-    """ Copy File or Folder To.
-
-    Use [util copytree]
-    The original method will report an error if there is no target directory
-
-    :param __src_path: Source Path
-    :param __dst_path: Target Path
-    :param __cover: Use [util copytree] or Use [shutil copytree]
-    :return:
+    """
+    移动文件
+    Args:
+        __src_path: 源文件路径
+        __dst_path: 目标文件路径
+        __cover: 是否覆盖
+    Returns:
+        移动后的文件路径
     """
     return func.__move_to(__src_path, __dst_path, __cover)
 
 
 def get_free_space_mb(_folder):
-    """ Get Free Space Disk
-    :param _folder: Folder
-    :return: Return folder/drive free space (in bytes)
+    """
+    获取磁盘剩余空间
+    Args:
+        _folder: 文件夹路径
+    Returns:
+        磁盘剩余空间
     """
     return func.__get_free_space_mb(_folder)
 
 
 def get_file_size(_path):
-    """ Get File Size
-    :param _path: File Path
+    """
+    获取文件大小
+    Args:
+        _path: 文件路径
+    Returns:
+        文件大小
     """
     return func.__get_file_size(_path)
 
 
 def init_vpn(_name, _user, _password, _secret):
-    """ Init Vpn Class.
-
-    Turn VPN on or off on Mac computers
-
-    :param _name: VPN Name
-    :param _user: VPN User
-    :param _password: VPN Password
-    :param _secret: VPN Secret
-    :return: VPN Class
+    """
+    初始化VPN工具类
+    Args:
+        _name: VPN名称
+        _user: 用户名
+        _password: 密码
+        _secret: 密钥
+    Returns:
+        VPN工具类
     """
     global vpn
     vpn = vpn or VPNHelper(_name, _user, _password, _secret)
@@ -128,17 +132,17 @@ def init_vpn(_name, _user, _password, _secret):
 
 
 def init_ftp(_host, _port, _user, _passwd, _debug_lv=0, _buf_size=1024 * 1024):
-    """ Init FTP Class.
-
-    Uploading with FTP
-
-    :param _host: CDN HOST
-    :param _port: CDN PORT
-    :param _user: CDN User
-    :param _passwd: CDN Password
-    :param _debug_lv: Debug Log Level
-    :param _buf_size: Uploading Max Buffer Size
-    :return: FTP Class
+    """
+    初始化FTP工具类
+    Args:
+        _host: 主机
+        _port: 端口
+        _user: 用户名
+        _passwd: 密码
+        _debug_lv: 调试等级
+        _buf_size: 缓冲区大小
+    Returns:
+        FTP工具类
     """
     global ftp
     ftp = ftp or FTPHelper(_host, _port, _user, _passwd, _debug_lv, _buf_size)
@@ -147,15 +151,15 @@ def init_ftp(_host, _port, _user, _passwd, _debug_lv=0, _buf_size=1024 * 1024):
 
 
 def init_ssh(_host, _port, _user, _passwd):
-    """ Init SSH Class.
-
-    Uploading with SFTP
-
-    :param _host: CDN HOST
-    :param _port: CDN PORT
-    :param _user: CDN User
-    :param _passwd: CDN Password
-    :return: SSH Class
+    """
+    初始化SSH工具类
+    Args:
+        _host: 主机
+        _port: 端口
+        _user: 用户名
+        _passwd: 密码
+    Returns:
+        SSH工具类
     """
     global ssh
     ssh = ssh or SSHHelper(_host, _port, _user, _passwd)
@@ -164,18 +168,18 @@ def init_ssh(_host, _port, _user, _passwd):
 
 
 def init_cdn_flush(_url, _headers, _user, _pass, _pad, _path=None, _email=None):
-    """ Init CDN Flush Class.
-
-    Flush CDN (KR)
-
-    :param _url: CDN Flush Url
-    :param _headers: CDN Flush Url Headers
-    :param _user: CDN Flush User
-    :param _pass: CDN Flush Password
-    :param _pad: CDN Flush PAD
-    :param _path: CDN Flush Path (if want to flush item path)
-    :param _email: Email for notification
-    :return: CDN Flush Class
+    """
+    初始化CDN刷新工具类
+    Args:
+        _url: 刷新地址
+        _headers: 请求头
+        _user: 用户名
+        _pass: 密码
+        _pad: 填充
+        _path: 路径
+        _email: 邮箱
+    Returns:
+        CDN刷新工具类
     """
     global flush
     flush = flush or CDNFlushHelper(_url, _headers, _user, _pass, _pad, _path, _email)
@@ -184,15 +188,15 @@ def init_cdn_flush(_url, _headers, _user, _pass, _pad, _path=None, _email=None):
 
 
 def init_svn(_user, _password, _path, _clean_path=None):
-    """ Init SVN Class.
-
-    Use SVN for cleanup, restore, update, and commit operations
-
-    :param _user: SVN Account
-    :param _password: SVN Password
-    :param _path: SVN Project Path (Trunk_KR)
-    :param _clean_path: SVN Project Clean Path (Trunk_KR/Client)
-    :return: SVN Class
+    """
+    初始化SVN工具类
+    Args:
+        _user: 用户名
+        _password: 密码
+        _path: SVN路径
+        _clean_path: 清理路径
+    Returns:
+        SVN工具类
     """
     global svn
     svn = svn or SVNHelper(_user, _password, _path, _clean_path)
@@ -201,14 +205,14 @@ def init_svn(_user, _password, _path, _clean_path=None):
 
 
 def init_unity(_sysparams, _log, _build_target):
-    """ Init Unity Class.
-
-    Use Unity for platforming, packaging, hot changes, variant collection
-
-    :param _sysparams: Jenkins Parameter
-    :param _log: Unity Project Log Path
-    :param _build_target: Unity Platform Target
-    :return: Unity Class
+    """
+    初始化Unity工具类
+    Args:
+        _sysparams: 系统参数
+        _log: 日志路径
+        _build_target: 构建目标
+    Returns:
+        Unity工具类
     """
     global unity
     unity = unity or UnityHelper(_sysparams, _log, _build_target)
@@ -217,13 +221,13 @@ def init_unity(_sysparams, _log, _build_target):
 
 
 def init_jar(_bt_jar, _us_jar):
-    """ Init Jar Class.
-
-    Mainly use jar for installation and export operation, you can also upload Bugly symbol
-
-    :param _bt_jar: bundletool-all-1.6.1.jar Path
-    :param _us_jar: buglyqq-upload-symbol.jar Path
-    :return: Jar Class
+    """
+    初始化Jar工具类
+    Args:
+        _bt_jar: BundleTool Jar 路径
+        _us_jar: UploadSymbols Jar 路径
+    Returns:
+        Jar工具类
     """
     global jar
     jar = jar or JarHelper(_bt_jar, _us_jar)
@@ -232,12 +236,12 @@ def init_jar(_bt_jar, _us_jar):
 
 
 def init_tail(_log):
-    """ Init Tail Class.
-
-    Used to synchronize Unity's logs in real time
-
-    :param _log: Unity Log File Path
-    :return: Tail Class
+    """
+    初始化Tail工具类
+    Args:
+        _log: 日志路径
+    Returns:
+        Tail工具类
     """
     global tail
     tail = tail or TailHelper(_log)
@@ -246,12 +250,12 @@ def init_tail(_log):
 
 
 def init_xcode(_xcode_project):
-    """ Init XCode Class.
-
-    A series of operations used to build the IPA
-
-    :param _xcode_project: XCode Project Path
-    :return:
+    """
+    初始化XCode工具类
+    Args:
+        _xcode_project: XCode工程路径
+    Returns:
+        XCode工具类
     """
     global xcode
     xcode = xcode or XCodeHelper(_xcode_project)
@@ -260,13 +264,13 @@ def init_xcode(_xcode_project):
 
 
 def init_gradle(_gradle_path, _android_project_path):
-    """ Init Gradle Class
-
-    Clean up and build android projects with Gradle
-
-    :param _gradle_path: gradlew or gradlew.bat Path
-    :param _android_project_path: Android Project Path
-    :return: Gradle Class
+    """
+    初始化Gradle工具类
+    Args:
+        _gradle_path: Gradle路径
+        _android_project_path: Android工程路径
+    Returns:
+        Gradle工具类
     """
     global gradle
     gradle = gradle or GradleHelper(_gradle_path, _android_project_path)
@@ -275,14 +279,15 @@ def init_gradle(_gradle_path, _android_project_path):
 
 
 def init_cos(_secretId, _secretKey, _bucket, _region):
-    """ Init COScmd Class
-
-    Use Tencent COS to upload resources to Tencent Cloud storage
-
-    :param _secretId:secret id
-    :param _secretKey:secret key
-    :param _bucket:bucket
-    :param _region:region
+    """
+    初始化COS工具类
+    Args:
+        _secretId: secretId
+        _secretKey: secretKey
+        _bucket: bucket
+        _region: region
+    Returns:
+        COS工具类
     """
     global cos
     cos = cos or COSHelper(_secretId, _secretKey, _bucket, _region)
@@ -291,7 +296,10 @@ def init_cos(_secretId, _secretKey, _bucket, _region):
 
 
 def init_aws():
-    """ Init AWScmd Class
+    """
+    初始化AWS工具类
+    Returns:
+        AWS工具类
     """
     global aws
     aws = aws or AWSHelper()

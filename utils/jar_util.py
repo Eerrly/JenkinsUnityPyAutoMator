@@ -9,8 +9,16 @@ class JAR(Enum):
 
 
 class JarHelper:
-    """Jar 工具类"""
+    """
+    Jar 工具类
+    """
     def __init__(self, _bt_jar, _us_jar):
+        """
+        初始化Jar工具类
+        Args:
+            _bt_jar: BundleTool Jar 路径
+            _us_jar: UploadSymbols Jar 路径
+        """
         self.bt_jar = _bt_jar
         self.us_jar = _us_jar
 
@@ -19,6 +27,24 @@ class JarHelper:
 
     def __function(self, _enum, _bundle=None, _output=None, _mode=None, _keystore=None, _k_pass=None, _key_alias=None, _key_pass=None,
                    _appid=None, _appkey=None, _bundleid=None, _version=None, _platform=None, _df_path=None):
+        """
+        执行方法
+        Args:
+            _enum: 枚举类型
+            _bundle: Android App Bundle 文件路径
+            _output: APKS 的导出路径
+            _mode: 模式 (universal)
+            _keystore: Android KeyStore 路径
+            _k_pass: k_pass
+            _key_alias: key_alias
+            _key_pass: key_pass
+            _appid: appid
+            _appkey: appkey
+            _bundleid: bundleid
+            _version: 版本号
+            _platform: 平台
+            _df_path: 符号表文件路径
+        """
         _command = _enum.value.format(bt_jar=self.bt_jar, us_jar=self.us_jar, bundle=_bundle, output=_output, mode=_mode, keystore=_keystore, k_pass=_k_pass, key_alias=_key_alias, key_pass=_key_pass,
                                       appid=_appid, appkey=_appkey, bundleid=_bundleid, version=_version, platform=_platform, df_path=_df_path)
         sys.stdout.write(_command + "\n")

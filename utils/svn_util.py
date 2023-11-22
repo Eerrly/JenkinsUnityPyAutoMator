@@ -4,6 +4,18 @@ from enum import Enum
 
 
 class SVN(Enum):
+    """
+    SVN枚举
+    Attributes:
+        CleanUp: 清理
+        ResolveTheirsFull: 解决冲突（使用远端文件）
+        ResolveWorking: 解决冲突（使用本地文件）
+        Revert: 还原
+        UpdateTheirsFull: 更新（使用远端文件）
+        Diff: 差异
+        Status: 状态
+        Commit: 提交
+    """
     CleanUp = "svn cleanup {clean_path} --username {user} --password {password}"
     ResolveTheirsFull = "svn resolve -R --accept theirs-full {path} --username {user} --password {password}"
     ResolveWorking = "svn resolve -R --accept working {path} --username {user} --password {password}"
@@ -15,8 +27,18 @@ class SVN(Enum):
 
 
 class SVNHelper:
-    """SVN工具类"""
+    """
+    SVN工具类
+    """
     def __init__(self, _user, _password, _path, _clean_path=None):
+        """
+        初始化SVN工具类
+        Args:
+            _user: 用户名
+            _password: 密码
+            _path: SVN路径
+            _clean_path: 清理路径
+        """
         self.user = _user
         self.password = _password
         self.path = _path
@@ -26,6 +48,16 @@ class SVNHelper:
         return "svn information >\nuser:%s\npassword:******\npath:%s\nclean_path:%s" % (self.user, self.path, self.clean_path)
 
     def __function(self, _enum, _lv=None, _rv=None, _out_file=None, _file_path=None, _commit_message=None):
+        """
+        执行方法
+        Args:
+            _enum: 枚举类型
+            _lv: SVN起始版本
+            _rv: SVN结束版本
+            _out_file: 导出文件路径
+            _file_path: 文件路径
+            _commit_message: 提交信息
+        """
         _command = _enum.value.format(user=self.user, password=self.password, path=self.path, clean_path=self.clean_path, l_version=_lv, r_version=_rv, file_path=_file_path,
                                       commit_message=_commit_message)
         sys.stdout.write(_command + "\n")

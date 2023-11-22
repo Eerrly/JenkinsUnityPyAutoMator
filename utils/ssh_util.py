@@ -9,6 +9,14 @@ class SSHHelper:
     SSH File Transfer Protocol (SFTP)
     """
     def __init__(self, _host, _port, _user, _passwd):
+        """
+        初始化SSH工具类
+        Args:
+            _host: 主机
+            _port: 端口
+            _user: 用户名
+            _passwd: 密码
+        """
         self.host = _host
         self.port = _port
         self.user = _user
@@ -21,6 +29,12 @@ class SSHHelper:
         return "ssh information >\nuser:%s\npasswd:******\nhost:%s\nport:%d" % (self.user, self.host, self.port)
 
     def __cwd(self, _remote_path, _can_delete=False):
+        """
+        切换远端文件夹
+        Args:
+            _remote_path: 远端文件夹
+            _can_delete: 是否删除需要上传的远端路径下的其他文件
+        """
         _dir_list = _remote_path.split("/")
         index = 0
         while index < len(_dir_list):
@@ -39,6 +53,12 @@ class SSHHelper:
             self.del_dir()
 
     def __exist_ftp_file(self, _remote_file, _remote_dir=None):
+        """
+        判断远端文件是否存在
+        Args:
+            _remote_file: 远端文件
+            _remote_dir: 远端文件夹
+        """
         try:
             if _remote_dir is not None:
                 self.__cwd(_remote_dir, False)
@@ -50,21 +70,43 @@ class SSHHelper:
             return False
 
     def __upload_call_back(self, transferred, toBeTransferred):
+        """
+        上传回调
+        Args:
+            transferred: 已经上传的大小
+            toBeTransferred: 总大小
+        """
         sys.stdout.write("uploading %.2f%% ... \n" % (float(transferred) / toBeTransferred * 100))
         sys.stdout.flush()
 
     def cd(self, _path):
+        """
+        切换远端文件夹
+        Args:
+            _path: 远端文件夹
+        """
         self.sftp.chdir(_path)
 
     def quit(self):
+        """
+        退出FTP
+        """
         self.sftp.close()
 
     def __del_file(self, _f):
+        """
+        删除远端文件
+        Args:
+            _f: 远端文件
+        """
         sys.stdout.write(">[-] %s ... \n" % _f)
         sys.stdout.flush()
         self.sftp.remove(_f)
 
     def del_dir(self):
+        """
+        删除远端文件夹
+        """
         for _f in self.sftp.listdir():
             try:
                 self.sftp.chdir(_f)
@@ -77,6 +119,11 @@ class SSHHelper:
                 self.__del_file(_f)
 
     def upload_file(self, _local_file):
+        """
+        上传文件
+        Args:
+            _local_file: 本地文件
+        """
         if not os.path.isfile(_local_file):
             sys.stdout.write("is not file > %s ... \n" % _local_file)
             sys.stdout.flush()
@@ -91,6 +138,11 @@ class SSHHelper:
         self.sftp.put(_local_file, __local_file_name, callback=self.__upload_call_back)
 
     def upload_dir(self, _local_dir):
+        """
+        上传文件夹
+        Args:
+            _local_dir: 本地文件夹
+        """
         if not os.path.isdir(_local_dir):
             sys.stdout.write("is not dir > %s ... \n" % _local_dir)
             sys.stdout.flush()

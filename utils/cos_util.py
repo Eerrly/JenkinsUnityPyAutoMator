@@ -22,6 +22,13 @@ class COSHelper:
         return "cos information >\nsecretId:%s\nbucket:%s\nregion:%s" % (self.secretId, self.bucket, self.region)
 
     def __function(self, _enum, _local_path=None, _remote_path=None):
+        """
+        执行方法
+        Args:
+            _enum: 枚举类型
+            _local_path: 本地文件
+            _remote_path: 远端文件
+        """
         _command = _enum.value.format(
             secretId=self.secretId, secretKey=self.secretKey, bucket=self.bucket, region=self.region,
             local_path=_local_path, remote_path=_remote_path

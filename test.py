@@ -1,4 +1,7 @@
 # -*- coding: UTF-8 -*-
+import hashlib
+import os
+
 import util
 import sys
 
