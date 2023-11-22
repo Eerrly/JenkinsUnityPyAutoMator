@@ -10,6 +10,9 @@ _file_path = None
 
 
 def init_jenkins_params():
+    """
+    初始化Jenkins参数
+    """
     util.console(" call Init Static Params start ".center(200, "#"))
     global _flush_type, _file_path
     _flush_type = os.environ["flush_type"]
@@ -22,6 +25,9 @@ def init_jenkins_params():
 
 
 def flush_node():
+    """
+    刷新节点
+    """
     util.console(" flush start ".center(200, "#"))
     __flush = util.init_cdn_flush(const.CDN_FLUSH_URL, const.CDN_FLUSH_HEADERS, const.CDN_FLUSH_USER, const.CDN_FLUSH_PASS, const.CDN_FLUSH_PAD, _file_path, const.CDN_FLUSH_EMAIL)
     __flush.flush()
@@ -29,6 +35,9 @@ def flush_node():
 
 
 def main_function():
+    """
+    主函数
+    """
     init_jenkins_params()
     flush_node()
 
