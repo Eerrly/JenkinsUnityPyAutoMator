@@ -169,9 +169,10 @@ def xcode_build():
 
     __iconPath = os.path.join(IOS_TOOLS_PATH, "icon")
     if os.path.exists(__iconPath):
-        __appiconset = os.path.join(__xcode_project_path, "Unity-iPhone/Images.xcassets/AppIcon.appiconset")
-        util.console("copy icon to %s" % __appiconset)
-        util.move(__iconPath, __appiconset)
+        __panopticons = os.path.join(__xcode_project_path, "Unity-iPhone/Images.xcassets")
+        shutil.rmtree(__panopticons)
+        util.console("copy %s to %s" % (__iconPath, __panopticons))
+        util.move(__iconPath, __panopticons)
 
     __xcode = util.init_xcode(__xcode_project_path)
     __xcode.Clean()
@@ -219,7 +220,7 @@ def main_function():
         raise Exception("No space left /Users/lmd/Library/Developer/Xcode/DerivedData!")
     elif os.path.exists("/Users/yangxiaochun/Library/Developer/Xcode/DerivedData") and util.get_free_space_mb("/Users/yangxiaochun/Library/Developer/Xcode/DerivedData") < const.MAC_MAX_DISK:
         raise Exception("No space left /Users/yangxiaochun/Library/Developer/Xcode/DerivedData!")
-    # IOS_Tools only as a local folder
+    # IOS_Tools 改为本地文件夹，不在使用SVN来更新
     # update_ios_project()
     xcode_build()
     copy_outputs_to_share()
