@@ -141,17 +141,17 @@ def copy_windows_exe_to_share():
     if localBuildTime < 0 or localBuildTime > __output_time:
         raise Exception("unity build or output error!")
 
-    __copy_path = os.path.join("ShareSoftware\\EXE_OutPut\\", "%s\\%s" % (jenkins_params.JOB_NAME, jenkins_params.BUILD_NUMBER))
-    for f in os.listdir(__outputs_path):
-        if f.endswith(".zip"):
-            util.move(os.path.join(__outputs_path, f), os.path.join(__desktop_Path, __copy_path, f))
-            break
+    # sort by modify time
+    __file_lists = os.listdir(__outputs_path)
+    __file_lists.sort(key=lambda fn: os.path.getmtime(__outputs_path + "\\" + fn) if not os.path.isdir(__outputs_path + "\\" + fn) else 0)
+    __zip_file = os.path.join(__outputs_path, __file_lists[-1])
 
-    __jenkins_targetPath = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
-    for f in os.listdir(__outputs_path):
-        if f.endswith(".zip"):
-            util.move(os.path.join(__outputs_path, f), os.path.join(__jenkins_targetPath, "PC.zip"))
-            break
+    __share_path = os.path.join("ShareSoftware\\EXE_OutPut\\", "%s\\%s" % (jenkins_params.JOB_NAME, jenkins_params.BUILD_NUMBER))
+    __jenkins_workspace = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
+    # share the zip for windows package to shared folder and jenkins workspace
+    util.move(__zip_file, os.path.join(__desktop_Path, __share_path, __file_lists[-1]))
+    util.move(__zip_file, os.path.join(__jenkins_workspace, "PC.zip"))
+
     util.console(" copy windows exe to share end ".center(200, "#"))
 
 
