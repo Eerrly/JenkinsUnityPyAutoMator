@@ -6,6 +6,7 @@ from enum import Enum
 class XCODE(Enum):
     """
     XCODE枚举
+    (M1,M2芯片出现Archive失败， 追加 -destination 'generic/platform=iOS')
     Attributes:
         PlistBuddyShortVersion: 修改短版本号
         PlistBuddyVersion: 修改版本号
@@ -26,9 +27,9 @@ class XCODE(Enum):
     PlistBuddyAddAppleSignValue = "/usr/libexec/PlistBuddy -c 'Add :com.apple.developer.applesignin: string Default' {entitlements}"
     PlistBuddyDelAppleSign = "/usr/libexec/PlistBuddy -c 'Delete :com.apple.developer.applesignin' {entitlements}"
     Clean = "xcodebuild clean -project {xcode_project}/Unity-iPhone.xcodeproj -alltargets -UseModernBuildSystem=YES"
-    Archive = "xcodebuild archive -project {xcode_project}/Unity-iPhone.xcodeproj -scheme 'Unity-iPhone' -configuration '{build_type}' -archivePath {archive_path} CODE_SIGN_IDENTITY='{CODE_SIGN_IDENTITY}' PROVISIONING_PROFILE{APP}='{PROVISIONING_PROFILE}' DEVELOPMENT_TEAM='{DEVELOPMENT_TEAM}' PRODUCT_BUNDLE_IDENTIFIER={bundle_identifier} CODE_SIGN_STYLE='Manual' -UseModernBuildSystem=YES -destination 'generic/platform=iOS'"
+    Archive = "xcodebuild archive -project {xcode_project}/Unity-iPhone.xcodeproj -scheme 'Unity-iPhone' -configuration '{build_type}' -archivePath {archive_path} CODE_SIGN_IDENTITY='{CODE_SIGN_IDENTITY}' PROVISIONING_PROFILE{APP}='{PROVISIONING_PROFILE}' DEVELOPMENT_TEAM='{DEVELOPMENT_TEAM}' PRODUCT_BUNDLE_IDENTIFIER={bundle_identifier} CODE_SIGN_STYLE='Manual' -UseModernBuildSystem=YES"
     ArchiveAutomatic = "xcodebuild archive -project {xcode_project}/Unity-iPhone.xcodeproj -scheme 'Unity-iPhone' -configuration '{build_type}' -archivePath {archive_path} -allowProvisioningUpdates"
-    ModifyBundleIdentifierAndArchive = "xcodebuild archive -project {xcode_project}/Unity-iPhone.xcodeproj -scheme 'Unity-iPhone' -configuration '{build_type}' -archivePath {archive_path} CODE_SIGN_IDENTITY='{CODE_SIGN_IDENTITY}' PROVISIONING_PROFILE{APP}='{PROVISIONING_PROFILE}' DEVELOPMENT_TEAM='{DEVELOPMENT_TEAM}' PRODUCT_BUNDLE_IDENTIFIER='{bundle_identifier}' CODE_SIGN_STYLE='Manual' -UseModernBuildSystem=YES -destination 'generic/platform=iOS'"
+    ModifyBundleIdentifierAndArchive = "xcodebuild archive -project {xcode_project}/Unity-iPhone.xcodeproj -scheme 'Unity-iPhone' -configuration '{build_type}' -archivePath {archive_path} CODE_SIGN_IDENTITY='{CODE_SIGN_IDENTITY}' PROVISIONING_PROFILE{APP}='{PROVISIONING_PROFILE}' DEVELOPMENT_TEAM='{DEVELOPMENT_TEAM}' PRODUCT_BUNDLE_IDENTIFIER='{bundle_identifier}' CODE_SIGN_STYLE='Manual' -UseModernBuildSystem=YES"
     Export = "xcodebuild -exportArchive -archivePath {archive_path} -exportPath {export_path} -exportOptionsPlist {export_Options_plist} -UseModernBuildSystem=YES"
     UploadDsym = "{upload_symbols} -gsp {google_plist} -p ios {dsym_file}"
 
