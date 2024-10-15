@@ -115,9 +115,8 @@ def __copy_to_artifact_path(_zip_file):
     Args:
         _zip_file: 压缩文件路径
     """
-    __jenkins_target_path = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
-    util.console("jenkins_target_path : " + __jenkins_target_path + ", _zip_file : " + _zip_file)
-    __copy_path = os.path.join(__jenkins_target_path, os.path.basename(_zip_file))
+    util.console("jenkins_target_path : " + jenkins_params.WORKSPACE + ", _zip_file : " + _zip_file)
+    __copy_path = os.path.join(jenkins_params.WORKSPACE, os.path.basename(_zip_file))
     util.move(_zip_file, __copy_path)
 
 
@@ -147,10 +146,9 @@ def copy_windows_exe_to_share():
     __zip_file = os.path.join(__outputs_path, __file_lists[-1])
 
     __share_path = os.path.join("ShareSoftware\\EXE_OutPut\\", "%s\\%s" % (jenkins_params.JOB_NAME, jenkins_params.BUILD_NUMBER))
-    __jenkins_workspace = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
     # share the zip for windows package to shared folder and jenkins workspace
     util.move(__zip_file, os.path.join(__desktop_Path, __share_path, __file_lists[-1]))
-    util.move(__zip_file, os.path.join(__jenkins_workspace, "PC.zip"))
+    util.move(__zip_file, os.path.join(jenkins_params.WORKSPACE, "PC.zip"))
 
     util.console(" copy windows exe to share end ".center(200, "#"))
 

@@ -96,11 +96,10 @@ def copy_patch_zip_to_artifact():
     拷贝热更压缩包到Jenkins存档文件夹中
     """
     util.console(" copy Patch_*.zip to artifact start ".center(200, "#"))
-    jenkins_targetPath = os.path.join(jenkins_params.JENKINS_HOME, "workspace\\%s" % jenkins_params.JOB_NAME)
 
     file_lists = os.listdir(path_params.PATCH_PATH)
     file_lists.sort(key=lambda fn: os.path.getmtime(path_params.PATCH_PATH + "\\" + fn) if not os.path.isdir(path_params.PATCH_PATH + "\\" + fn) else 0)
-    __copy_path = os.path.join(jenkins_targetPath, "Patch_%s.zip" % patch_params.channel)
+    __copy_path = os.path.join(jenkins_params.WORKSPACE, "Patch_%s.zip" % patch_params.channel)
     if os.path.exists(__copy_path):
         os.remove(__copy_path)
 
