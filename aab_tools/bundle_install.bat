@@ -18,7 +18,7 @@ echo "Step 1: Build Apks ..."
 :: 会找当前目录中的aab 确保只有一个aab
 for /f "delims=" %%a in ('dir /b *.aab') do (set aab=%%a);
 echo aab=%aab%
-java -jar "%~dp0\bundletool-all-1.6.1.jar" build-apks --connected-device --bundle=%aab% --output=multi.apks ^
+java -jar "%~dp0\bundletool-all-1.6.1.jar" build-apks --mode=universal --bundle=%aab% --output=multi.apks ^
 --ks=%key% ^
 --ks-key-alias=%ks_key_alias% ^
 --ks-pass=pass:%ks_pass% ^
