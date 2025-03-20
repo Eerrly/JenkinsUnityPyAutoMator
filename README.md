@@ -115,7 +115,8 @@
 <details>
 <summary>utils/jar_util.py</summary>
     
- - jar进行符号表上传，android app bundle[^aab] 的安装
+ - jar进行符号表上传
+ - android app bundle[^aab] 的安装
 </details>
 
 <details>
@@ -145,7 +146,8 @@
 <details>
 <summary>utils/xcode_util.py</summary>
     
- - 构建xcode工程，修改plist文件
+ - 构建xcode工程
+ - 修改plist文件
 </details>
 
 <details>
